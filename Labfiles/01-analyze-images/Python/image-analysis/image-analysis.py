@@ -4,10 +4,10 @@ from PIL import Image, ImageDraw
 import sys
 from matplotlib import pyplot as plt
 from azure.core.exceptions import HttpResponseError
+from azure.ai.vision.imageanalysis import ImageAnalysisClient
+from azure.ai.vision.imageanalysis.models import VisualFeatures
+from azure.core.credentials import AzureKeyCredential
 import requests
-
-# Import namespaces
-
 
 def main():
     global cv_client
@@ -15,6 +15,8 @@ def main():
     try:
         # Get Configuration Settings
         load_dotenv()
+        os.environ['AI_SERVICE_ENDPOINT'] = 'https://mslearn-labs.cognitiveservices.azure.com'
+        os.environ['AI_SERVICE_KEY'] = 'ad0ea1073fc144c99422618fa9c8d494'
         ai_endpoint = os.getenv('AI_SERVICE_ENDPOINT')
         ai_key = os.getenv('AI_SERVICE_KEY')
 
@@ -40,10 +42,11 @@ def main():
 
 
 def AnalyzeImage(image_filename, image_data, cv_client):
-    print('\nAnalyzing image...')
+
 
     try:
         # Get result with specified features to be retrieved
+        print('\nAnalyzing image...')
         
 
     except HttpResponseError as e:
